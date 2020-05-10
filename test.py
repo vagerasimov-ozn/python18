@@ -1,6 +1,8 @@
-year = 2020
-data = int(input("Сколько вам лет? "))
-year_future = int(input("В какои году хотите узнать свой возраст? "))
-diff = year_future - year
-future_age = data + diff
-print("B ") + str(year_future) + " вам будет " + str(future_ag)
+spi = ['volvo','suzuki','bmv']
+#for i in range(5):
+ #   print(barsuk)
+#for i in range(len(spi)):
+ #   print(spi[i])
+
+ for car in spi:
+     print(car)
