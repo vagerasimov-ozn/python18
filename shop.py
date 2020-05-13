@@ -8,3 +8,4 @@ for word in arr_info:
     else:
         print("не сковородка")
 print(new_spi)
+print(arr_info)
