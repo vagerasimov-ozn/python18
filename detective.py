@@ -13,3 +13,10 @@ live_near = {'john', 'vladislav', 'olga', 'mike', 'grant', 'covid', 'bilbo' }
 #  д/з объединить множество людей, которые живут и работают рядом
 # вывести множество людей, которые и владеют авто нужной марки, и живут и работают рядом
 
+new_set = {}
+    input = live_near | work_near
+
+
+# new_mnog = ['petr','semen','sasha']
+# new_mnog = set(new_mnog)
+# print(new_mnog)
