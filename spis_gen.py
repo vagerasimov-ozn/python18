@@ -1,11 +1,11 @@
-cube = [value **3 for value in range(1,10)]
-print (cube)
+cube = [value**3 for value in range(1, 11)]
+print(cube)
 
-square = [i**2 for i in range(0,20)]
+square = [i**2 for i in range(0, 20)]
 print(square)
 print(cube)
 
-massiv = ["sdsd",1, 2, 5, 6]
+massiv = ["sdsd", 1, 2, 5, 6]
 print(len(massiv))
 
 print(massiv[-2:])
