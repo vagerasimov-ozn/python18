@@ -1,14 +1,28 @@
+import time
+
 import requests
 from bs4 import BeautifulSoup
+import csv
+import subprocess
 
-URL = 'http://auto.ria.com/newauto/marka-jeep/'
+URL = 'http://auto.ria.com/newauto/marka-audi/'
 HEADERS = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36', 'accept': '*/*'}
 HOST = 'https://auto.ria.com'
+FILE = 'cars.csv'
 
 
 def get_html(url, params=None):
     r = requests.get(url, headers=HEADERS, params=params)
     return r
+
+
+def get_pages_count(html):
+    soup = BeautifulSoup(html, 'html.parser')
+    pagination = soup.find_all('span', class_='mhide')
+    if pagination:
+        return int(pagination[-1].get_text())
+    else:
+        return 1
 
 
 def get_content(html):
@@ -32,11 +46,31 @@ def get_content(html):
     return cars
 
 
+def save_file(items, path):
+    with open(path, 'w', newline='') as file:
+        writer = csv.
+    with open(path, 'w', newline='') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerow(['Марка', 'Ссылка', 'Цена в $', 'Цена в грн', 'Город'])
+        for item in items:
+            writer.writerow([item['title'], item['link'], item['usd_price'], item['uah_price'], item['city']])
+
+
 def parse():
+    URL = input('Введите URL: ')
+    URL = URL.strip()
     html = get_html(URL)
     if html.status_code == 200:
-        cars = get_content(html.text)
-        print(cars)
+        cars = []
+        pages_count = get_pages_count(html.text)
+        for page in range(1, pages_count + 1):
+            print(f'Парсинг страницы {page} из {pages_count}...')
+            html = get_html(URL, params={'page': page})
+            cars.extend(get_content(html.text))
+            time.sleep(5)
+        save_file(cars, FILE)
+        print(f'Получено {len(cars)} автомобилей')
+        subprocess.check_call(['open', '-a', 'Microsoft Excel', FILE])
     else:
         print('Error')
 
