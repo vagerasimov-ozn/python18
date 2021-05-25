@@ -48,8 +48,6 @@ def get_content(html):
 
 def save_file(items, path):
     with open(path, 'w', newline='') as file:
-        writer = csv.
-    with open(path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerow(['Марка', 'Ссылка', 'Цена в $', 'Цена в грн', 'Город'])
         for item in items:
